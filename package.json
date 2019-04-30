@@ -29,6 +29,9 @@
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
+    "gulp": "^4.0.1",
+    "gulp-filter": "^5.1.0",
+    "gulp-print": "^5.0.2",
     "jest": "^20.0.4"
   }
 }
