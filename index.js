@@ -11,14 +11,14 @@ module.exports = function (options){
         showWarnings: false
     };
 
-    options = _extend(defaultOptions, (options || {}));
+    options = Object.assign(defaultOptions, (options || {}));
 
     var buffer, packages, key, keys, caller, override;
     buffer = fs.readFileSync(options.packageJsonPath);
     packages = JSON.parse(buffer.toString());
     keys = [];
 
-    var overrides = packages.overrides || {};
+    var overrides = options.overrides || packages.overrides || {};
 
     if(!path.isAbsolute(options.nodeModulesPath)) {
         caller = callerId.getData();
@@ -44,14 +44,6 @@ module.exports = function (options){
 
     return keys;
 };
-
-function _extend(object, source) {
-    var obj = {};
-    for (var key in object) {
-        obj[key] = source[key] || object[key];
-    }
-    return obj;
-}
 
 /**
  * Gets the main files for a NPM module
@@ -95,3 +87,4 @@ function getMainFiles(modulePath, override, showWarnings) {
     }
     return files;
 }
+
